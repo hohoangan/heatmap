@@ -1,0 +1,25 @@
+{
+  "name": "puppeteer-heatmap-api",
+  "version": "1.0.0",
+  "description": "API lấy cụm thanh khoản từ Coinglass bằng Puppeteer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "puppeteer",
+    "coinglass",
+    "heatmap",
+    "crypto",
+    "API"
+  ],
+  "author": "An Ho",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "puppeteer": "^24.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
