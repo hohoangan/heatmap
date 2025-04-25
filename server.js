@@ -9,6 +9,8 @@ app.get('/heatmap', async (req, res) => {
 
     let browser;
     try {
+        console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
+        console.log(process.env.RENDER);
         // Phân biệt môi trường local và Render
         const isRender = process.env.RENDER === 'true'; // Render tự thêm biến RENDER=true
         const launchOptions = {
@@ -26,7 +28,7 @@ app.get('/heatmap', async (req, res) => {
 
         // Nếu chạy trên Render, thêm executablePath
         if (isRender) {
-            launchOptions.executablePath = '/opt/render/.cache/puppeteer/chrome/linux-135.0.7049.114/chrome-linux64/chrome';
+            launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
         }
 
         browser = await puppeteer.launch(launchOptions);
