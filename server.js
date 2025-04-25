@@ -9,8 +9,10 @@ app.get('/heatmap', async (req, res) => {
 
     let browser;
     try {
-        browser = await puppeteer.launch({
-            headless: false,
+        // Phân biệt môi trường local và Render
+        const isRender = process.env.RENDER === 'true'; // Render tự thêm biến RENDER=true
+        const launchOptions = {
+            headless: true,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -20,8 +22,14 @@ app.get('/heatmap', async (req, res) => {
                 '--disable-features=IsolateOrigins,site-per-process',
                 '--disable-site-isolation-trials'
             ]
-        });
+        };
 
+        // Nếu chạy trên Render, thêm executablePath
+        if (isRender) {
+            launchOptions.executablePath = '/opt/render/.cache/puppeteer/chrome/linux-135.0.7049.114/chrome-linux64/chrome';
+        }
+
+        browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });
 
@@ -167,4 +175,7 @@ app.get('/heatmap', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+app.get('/', (req, res) => {
+    res.send('Server đang chạy! Truy cập /heatmap để lấy dữ liệu.');
+});
 app.listen(PORT, () => console.log(`🔥 Server chạy tại http://localhost:${PORT}`));
