@@ -1,6 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
-
+process.env.PUPPETEER_CACHE_DIR = '/opt/render/.cache/puppeteer';
 const app = express();
 
 app.get('/heatmap', async (req, res) => {

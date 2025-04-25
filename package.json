@@ -4,7 +4,7 @@
   "description": "API lấy cụm thanh khoản từ Coinglass bằng Puppeteer",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "npx puppeteer browsers install chrome && node server.js"
   },
   "keywords": [
     "puppeteer",
